@@ -1,7 +1,10 @@
-const  mdLinks  = require('./index.js');
-mdLinks ('/noexiste.md').then((res) => {
+// const  mdLinks  = require('./index.js');
+
+import { mdLinks } from './index.js';
+
+mdLinks ().then((res) => {
     console.log(res)
 })
 .catch((error)=> {
-    console.log(error)
+    console.log('error en cli: ', error)
 });
