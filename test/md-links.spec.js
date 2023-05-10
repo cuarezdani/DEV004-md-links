@@ -26,3 +26,22 @@ const { mdLinks } = require('../index.js');
 //    })
 //   });
 // });
+
+
+//// para identificar los link a la hora de hacer los test
+/* describe("mdLinks", () => {
+it('mdLinks procesa un solo archivo con 3 links sin validar'), () =>{
+  const ruta = 'ejemplo.md';
+
+  return mdLinks(ruta, {validate: false}))
+  .then(
+    (array) => {
+      expect(array).toEqual([
+        href: 'https://carlosazaustre.es/manejando-la-asincronia-en-javascript',
+        text: 'Asíncronía en js',
+        file: 'ejemplo.md',
+      ])
+    }
+  )
+  }
+}); */

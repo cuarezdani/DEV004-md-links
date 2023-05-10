@@ -1,14 +1,15 @@
-import { existsSync, readdir } from 'node:fs'
+import { existsSync, readdir, readdirSync } from 'node:fs'
 import { resolve, isAbsolute } from 'node:path'
-
 import { readFile } from 'node:fs/promises'
+import fs from 'fs/promises';
 
-// mdLinks resive dos parametros
+// mdLinks recibe dos parametros
 // devuelve una promesa
 // resolve callback
 // reject
 
-const path = './';
+const path = './README.MD';
+
 // **********************//
 // La ruta es absoluta ? //
 // **********************//
@@ -32,33 +33,56 @@ export const mdLinks = (path, options) => {
   });
 };
 
-// ******************************************************************  //
-// readdir con el forEach lee todos los archivos dentro del directorio //
-// en este caso esta leyendo los archivos que terminan .md             //
-// ******************************************************************  //
+// ********************************************************************************************//
+// *readdir* con el forEach lee todos los archivos dentro del directorio                       //
+// en este caso esta leyendo los archivos que terminan .md                                     //
+// *endsWith* determinar si una cadena de texto termina con ciertos caracteres especificados   //
+// ********************************************************************************************//
 
-readdir('./', (error, archivos) => {
-  archivos.forEach(archivo => {
-    console.log('Todos los archivos del directorio: ', archivo);    
-  });
-  const archivosMd = archivos.filter(archivo => archivo.endsWith('.md'));
-  console.log('Archivos que terminan en .md: ', archivosMd);
+
+const archivos = readdirSync('./');
+archivos.forEach(archivo => {
+  console.log('Todos los archivos del directorio: ', archivo);    
 });
-
-
+const archivosMd = archivos.filter(archivo => archivo.endsWith('.md'));      
+console.log('Archivos que terminan en .md: ', archivosMd);
 
 
 
 // falta entrar en el archivo .md y extraer los link 
 // Para leer el contenido del archivo .md (se coloca utf para convertir el contenido y sea pueda entender)
 
- readFile ('nombre del archivo', 'utf-8', (error, data) =>{
-   if (!error) {
-     console.log(data);
-   }else {
-     console.log('error: ${error}');
-   }
- });
+// readFile ('README.md', 'utf-8', (error, data) =>{
+//   if (!error) {
+//     console.log(data);
+//   }else {
+//     console.log('error: ${error}');
+//   }
+// });
+
+// const fs = require('fs');
+
+//  function readFileAsync(path, encoding) {
+  // return new Promise((resolve, reject) => {
+    // console.log(readFileAsync);
+    // readFile(path, encoding, (err, data) => {
+      // if (err) {
+        // reject(err);
+      // } else {
+        // resolve(data);
+      // }
+    // });
+  // });
+//  
+ 
+//  eadFileAsync('README.md', 'utf-8')
+  // .then((data) => {
+    // console.log(data);
+  // })
+  // .catch((error) => {
+    // console.log(`Error: ${error}`);
+  // });
+
 
 
 
