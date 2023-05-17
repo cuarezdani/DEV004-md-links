@@ -9,7 +9,7 @@ import  path  from 'path';
 // resolve callback
 // reject
 
-const pathUser = 'C:/Users/Admin/Desktop/Dani/Laboratoria_4ta generacion/md_links/DEV004-md-links';
+const pathUser = 'C:/Users/Admin/Desktop/Dani/Laboratoria_4ta generacion/md_links/DEV004-md-links/';
 
 // **********************//
 // La ruta es absoluta ? //
@@ -45,7 +45,8 @@ const archivos = readdirSync(pathUser);
 archivos.map(archivo => {
   //console.log('Todos los archivos del directorio: ', archivo);    
 });
-const archivosMd = archivos.filter(archivo => archivo.endsWith('.md'));      
+const archivosMd = archivos.filter(archivo => archivo.endsWith('Prueba.md')); 
+console.log(archivosMd);
 //console.log('Archivos que terminan en .md: ', archivosMd);
 
 
@@ -55,28 +56,35 @@ const archivosMd = archivos.filter(archivo => archivo.endsWith('.md'));
 // Para leer el contenido del archivo .md (se coloca utf para convertir el contenido y sea pueda entender)  //
 // *********************************************************************************************************//
 
-// readFile ('README.md', 'utf-8', (error, data) =>{
-//   if (!error) {
-//     console.log('data: ', data);
-//   }else {
-//     console.log('error: ${error}');
-//   }
-// });
-
-//const fs = require('fs');
-
  const readFilePromise = (archivoMd) => {
    return new Promise((resolve, reject) => {
       readFile(archivoMd, 'utf-8')
       .then((data) => {
         resolve(data)
-      })
-      .catch((err) => {
-        reject(err)
+
+        readFilePromise(archivoMd)
+  .then(data => {
+    // Expresión regular para buscar enlaces Markdown
+    const regex = /\[([^\]]+)\]\(([^\)]+)\)/g;
+    
+    let match;
+    while ((match = regex.exec(data)) !== null) {
+      const linkText = match[1]; // Texto del enlace
+      const url = match[2]; // URL del enlace
+      
+      console.log(`Texto: ${linkText}`);
+      console.log(`URL: ${url}`);
+      console.log('---');
+    } 
+  })
+  .catch(err => {
+    console.log(`Error: ${err}`);
+  });
       })
    });
  }
- readFilePromise('README.md')
+ 
+ readFilePromise('Prueba.md')
    .then(data => {
      console.log(data);
    })
@@ -85,7 +93,10 @@ const archivosMd = archivos.filter(archivo => archivo.endsWith('.md'));
    });
 
 
-
+  
+// ****************************************************************//
+// Extraer links y validarlo                                       //
+// ****************************************************************//
 
 
 
