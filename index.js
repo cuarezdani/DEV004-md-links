@@ -7,8 +7,6 @@ import { promises } from "node:dns";
 import { archivosMd, pathUser, readFilePromise, searchLinks } from './export.js';
 
 
-
-
 // *************************************************//
 // const mdLinks que se usara mas adelante en CLI   //
 // ************************************************//
@@ -37,28 +35,27 @@ export const mdLinks = (pathUser, options) => {
 // ****************************************//
 // se usa axios para hacer la peticion     //
 // ****************************************//
-readFilePromise(archivosMd[0])
-  .then((data) => {
-    console.log(data);
-    const links = searchLinks(data, archivosMd[0]);
-    var resultados = [];
+readFilePromise(archivosMd[0])        //se pasa archivosMd[0] como argumento 
+  .then((data) => {                  // se ejecutara cuando la promesa de readFilePromise se resuelva correctamente
+    //console.log('contenido', data);
+    const links = searchLinks(data, archivosMd[0]);  // data y archivosMd[0] argumentos 
+    let resultados = [];
    // console.log(links);
-    links.map((link) => {
+    links.map((link) => { 
       //console.log(link.href);
       axios
-        .get(link.href)
-        .then((resp) => {
-          console.log(resp.status);
+        .get(link.href)             // Realiza una llamada HTTP GET al URL link.href utilizando la biblioteca Axios
+        .then((resp) => {           //se ejecuta cuando la llamada GET a link.href se resuelve correctamente El parámetro resp contiene la respuesta de la solicitud HTTP.
+         // console.log(resp.status);
           resultados.push({ ...link, status: resp.status, ok: "ok" });
-          console.log('*****', resultados);
+          //console.log('Links buenos', resultados);
         })
         .catch((error) => {
-          console.log(error.response.status);
-          resultados.push({ ...link, status: error.response.status, ok: "fail".ok });
+          //console.log(error.response.status);
+          resultados.push({ ...link, status: error.response.status, ok: "fail" });
+          console.log('Links rotos', resultados);
         });
     });
-    
-    console.log(resultados);
   })
   .catch((err) => {
     console.log(`error: ${err}`);

@@ -10,7 +10,7 @@ export const pathUser =
 // *******************************************************************//
 export const archivos = readdirSync(pathUser);
 archivos.map((archivo) => {
-  console.log("Todos los archivos del directorio: ", archivo);
+  //console.log("Todos los archivos del directorio: ", archivo);
 });
 
 // ******************************************************//
@@ -38,10 +38,10 @@ export const readFilePromise = (archivoMd) => {
 // **********************************************************************//
 // Ubica los links dentro del archivo mediante una expresion regular     //
 // *********************************************************************//
-export const searchLinks = (data, filename) => {
+export const searchLinks = (data, filename) => { // parametros que recibira data que es la cadena de texto en la que se buscarán los enlaces, y filename, que es el nombre del archivo asociado a los enlaces. 
   const string = data;
-  let regex = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((https:\/\/[^\)]+)\))/g;
-  const matchResult = [...string.matchAll(regex)];
+  let regex = /(?=\[(!\[.+?\]\(.+?\)|.+?)]\((https:\/\/[^\)]+)\))/g;  // expresion regular 
+  const matchResult = [...string.matchAll(regex)];  // busca todas las coincidencias
   let links = matchResult.map((m) => ({
     text: m[1],
     href: m[2],
