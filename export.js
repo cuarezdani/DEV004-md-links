@@ -1,22 +1,22 @@
-import { readdirSync } from "node:fs";
+//import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 
 //se declara una ruta absoluta
 export const pathUser =
-  "C:/Users/Admin/Desktop/Dani/Laboratoria_4ta generacion/md_links/DEV004-md-links/";
+  "C:/Users/Admin/Desktop/Dani/Laboratoria_4ta generacion/md_links/DEV004-md-links/Prueba.md";
 
 // *******************************************************************//
 // Entra en el directorio y entrega todos los archivos encontrados    //
 // *******************************************************************//
-export const archivos = readdirSync(pathUser);
-archivos.map((archivo) => {
-  //console.log("Todos los archivos del directorio: ", archivo);
-});
+// export const archivos = readdirSync(pathUser);
+// archivos.map((archivo) => {
+//   //console.log("Todos los archivos del directorio: ", archivo);
+// });
 
 // ******************************************************//
 // Muestra un array de archivos que terminan en .md      //
 // ******************************************************//
-export const archivosMd = archivos.filter((archivo) => archivo.endsWith(".md"));
+// export const archivosMd = archivos.filter((archivo) => archivo.endsWith(".md"));
 //console.log("+++++", archivosMd);
 
 
