@@ -14,14 +14,14 @@ archivos.map((archivo) => {
 });
 
 // ******************************************************//
-// fMuestra un array de archivos que terminan en .md     //
+// Muestra un array de archivos que terminan en .md      //
 // ******************************************************//
 export const archivosMd = archivos.filter((archivo) => archivo.endsWith(".md"));
 //console.log("+++++", archivosMd);
 
 
 // ***************************************************//
-// entre en el archivo .md y lee su contenido        //
+// entra en el archivo .md y lee su contenido        //
 // **************************************************//
 export const readFilePromise = (archivoMd) => {
   return new Promise((resolve, reject) => {
