@@ -17,13 +17,13 @@ import {
 export const mdLinks = (pathUser, options) => {
   return new Promise((resolve, reject) => {
     // existsSync del módulo fs de Node.js. La función existsSync devuelve true si la ruta existe y false si no existe.
-    console.log('"Ruta que entro"', pathUser);
-    console.log('"Estado de la ruta"', existsSync(pathUser));
+    // console.log('"Ruta que entro"', pathUser);
+    console.log('"Estado de la ruta"', existsSync(pathUser), pathUser, '<--------------');
     // si la ruta no existe, arroja el mensaje que esta en reject
     if (!existsSync(pathUser)) {
       reject("La ruta no existe");
     } else {
-      console.log("La ruta si existe!");
+      // console.log("La ruta si existe!");
       //(isAbsolute si la ruta es absoluta), en caso de que la ruta sea relativa se resuelve con el resolve
      let pathFile = "";
       if (path.isAbsolute(pathUser)) {
@@ -59,7 +59,14 @@ export const mdLinks = (pathUser, options) => {
                   status: error.response.status,
                   ok: "fail",
                 });
-                console.log("Links rotos", resultados);
+                // console.log("Links rotos", resultados);
+                // resolve(resultados)
+                // if(options.validate === true ){´
+                // resolve(resultados)
+                // }
+                // if(options.validate === true && options.stats == true){´
+                // resolve({stats})
+                // }
               });
           });
         })
@@ -70,6 +77,6 @@ export const mdLinks = (pathUser, options) => {
   });
 };
 
-mdLinks(pathUser, "options") // consumiendo la promesa
-  .then((result) => console.log("Resultado en index: ", result))
-  .catch((error) => console.log("error en index: ", error));
+// mdLinks(pathUser, "options") // consumiendo la promesa
+//   .then((result) => console.log("Resultado en index: ", result))
+//   .catch((error) => console.log("error en index: ", error));
